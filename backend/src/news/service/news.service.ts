@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateNewsDto } from '../dto/create-news.dto';
 import { NewsProvider } from '../provider/rawNews.provider';
 import { MongoNewsRepository } from '../repository/mongoNews.repository';
-import {instanceToInstance} from "class-transformer"
-import {validateOrReject} from "class-validator"
+import {validateOrReject} from "class-validator";
 
 
 @Injectable()
