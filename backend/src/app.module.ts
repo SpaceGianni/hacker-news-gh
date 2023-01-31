@@ -6,8 +6,10 @@ import { AppService } from './app.service';
 import { NewsModule } from './news/news.module';
 
 @Module({
-  imports: [NewsModule, HttpModule,MongooseModule.forRoot('mongodb://localhost:27017/hknews')],
+  imports: [MongooseModule.forRoot('mongodb://localhost:27017/hknews'),NewsModule, HttpModule],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
+
+
