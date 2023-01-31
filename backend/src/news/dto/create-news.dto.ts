@@ -1,7 +1,7 @@
 import { IsString,IsMongoId, IsDateString, IsNotEmpty } from 'class-validator';
 
 export class CreateNewsDto {
-  @IsMongoId()
+  @IsString()
   @IsNotEmpty()
   id: string;
 
