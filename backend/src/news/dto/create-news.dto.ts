@@ -1,4 +1,4 @@
-import { IsString,IsMongoId, IsDateString, IsNotEmpty } from 'class-validator';
+import { IsString, IsDateString, IsNotEmpty } from 'class-validator';
 
 export class CreateNewsDto {
   @IsString()
@@ -20,4 +20,7 @@ export class CreateNewsDto {
   @IsDateString()
   @IsNotEmpty()
   date: string;
+
+  delete_date: string;
+  story_id: string;
 }

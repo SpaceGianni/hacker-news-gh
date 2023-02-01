@@ -1,12 +1,22 @@
-import { Controller, Get } from '@nestjs/common';
-import { NewsService } from "../service/news.service";
+import { Controller, Get, Patch, Param, Body, Delete } from '@nestjs/common';
+import { NewsService } from '../service/news.service';
 
-@Controller('updatednews')
+@Controller('news')
 export class NewsController {
   constructor(private readonly newsService: NewsService) {}
 
   @Get()
   findAll() {
     return this.newsService.findAndSaveNews();
+  }
+
+  @Delete(':story_id')
+  removeOne(@Param('story_id') story_id: string) {
+    return this.newsService.softDelete(story_id);
+  }
+
+  @Get('updated')
+  returnNews() {
+    return this.newsService.getNews();
   }
 }
