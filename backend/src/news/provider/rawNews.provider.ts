@@ -9,7 +9,7 @@ export class NewsProvider {
   async findAll(): Promise<AlgoliaResponse> {
     const { data } = await firstValueFrom(
       this.httpService.get(
-        'https://hn.algolia.com/api/v1/search_by_date?page=2&query=nodejs',
+        'https://hn.algolia.com/api/v1/search_by_date?query=nodejs',
         {
           headers: {
             'Accept-Encoding': '*',
