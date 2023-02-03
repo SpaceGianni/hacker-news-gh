@@ -1,6 +1,6 @@
 export interface NewsInterface {
   _id: string;
-  created_at: string;
+  date: string;
   title: string;
   url: string;
   author: string;

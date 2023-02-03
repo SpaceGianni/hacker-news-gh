@@ -15,3 +15,12 @@
   height: 80%;
   background-color: #fff;
 }
+.newsTitle {
+  size: 13pt;
+  color: #333;
+}
+
+.newsAuthor {
+  size: 10px;
+  color: #999;
+}
