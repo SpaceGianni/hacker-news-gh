@@ -5,7 +5,7 @@ const axios = require("axios").default;
 
 export const getNews = async (): Promise<NewsInterface[]> => {
   const url = process.env.NEXT_PUBLIC_SERVER_URL_BACKEND;
-  const response = await axios.get(`${url}news`);
+  const response = await axios.get(`${url}news/updated`);
   const info = await response.data;
   return info;
 };

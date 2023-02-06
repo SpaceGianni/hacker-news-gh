@@ -6,17 +6,16 @@ import { NewsInterface } from "../../../news.interface";
 import News from "../../molecules/newsText/news";
 import { getNews, deleteNews } from "../../../utils/news.services";
 import styles from "./newsList.module.css";
+import Spinner from "../../atoms/spinner/spinner";
 
-//import { Spinner } from "../../atoms/spinner/spinner.tsx";
-
-export default function newsList() {
+export default function NewsList() {
   const [news, setNews] = useState<NewsInterface[]>([]);
 
-  const removeNews = (news: NewsInterface) => {
-    deleteNews(news._id);
+  const removeNews = (news: NewsInterface[], id: string) => {
+    deleteNews(id);
     setNews(
-      news.filter((seletedNews: any) => {
-        return seletedNews != news;
+      news.filter((selectedNews: any) => {
+        return selectedNews.id !== id;
       })
     );
   };
@@ -43,7 +42,7 @@ export default function newsList() {
             <p className={styles.newsTitle}>{oneNew.date}</p>
             <span
               className="material-symbols-outlined"
-              onClick={() => removeNews(oneNew)}
+              onClick={() => removeNews(news, oneNew._id)}
             ></span>
           </News>
         ))}

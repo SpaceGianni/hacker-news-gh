@@ -8,7 +8,8 @@ import Layout, {
 
 } from "../app/components/templates/layout";
 import Header from "../app/components/organisms/header/header.tsx";
-import HeaderTitles from "../app/components/molecules/headerTitles/headerTitles.tsx"
+import HeaderTitles from "../app/components/molecules/headerTitles/headerTitles.tsx";
+import NewsList from "../app/components/organisms/newsList/newsList.tsx";
 
 export default function Home() {
   return (<>
@@ -22,6 +23,10 @@ export default function Home() {
           title2={subtitleSite_part1 + " " + heart + " " + subtitleSite_part2}>
         </HeaderTitles>
       </Header>
+      <body>
+        <NewsList></NewsList>
+      </body>
+
     </Layout>
   </>);
 }
