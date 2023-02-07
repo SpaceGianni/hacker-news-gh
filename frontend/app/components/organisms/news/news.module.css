@@ -1,11 +1,11 @@
 .newsModule {
-  background-color: #fff;
-  border: 1px #ccc;
+  background-color: #a84949;
+  border: 1px solid #ccc;
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .newsModule:hover {
-  background-color: #fafafa;
+  background-color: #2ee577;
 }

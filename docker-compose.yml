@@ -24,6 +24,24 @@ services:
       - 3000:3000
     networks:
       - hackernews
+    volumes:
+      - ./backend:/backend
+
+  frontend:
+    depends_on:
+      - backend
+    build:
+      dockerfile: Dockerfile
+      target: development
+      context: ./frontend
+    container_name: frontend-dev
+    restart: always
+    ports:
+      - 5000:5000
+    networks:
+      - hackernews
+    volumes:
+      - ./frontend:/frontend
 
 networks:
   hackernews:

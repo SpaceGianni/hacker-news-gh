@@ -11,9 +11,9 @@ export class TasksService {
 
   private readonly logger = new Logger(TasksService.name);
 
-  @Cron(CronExpression.EVERY_10_MINUTES)
+  @Cron(CronExpression.EVERY_12_HOURS)
   handleCron() {
-    this.logger.debug('Called every 10 MINUTES');
+    this.logger.debug('Called every 12 hours');
     return this.newsService.findAndSaveNews();
   }
 }

@@ -7,7 +7,6 @@ import { CreateNewsDto } from '../dto/create-news.dto';
 import { NewsProvider } from '../provider/rawNews.provider';
 import { MongoNewsRepository } from '../repository/mongoNews.repository';
 import { validateOrReject } from 'class-validator';
-import { catchError } from 'rxjs';
 
 @Injectable()
 export class NewsService {
@@ -26,7 +25,7 @@ export class NewsService {
       objectNews.title = hit.story_title || hit.title;
       objectNews.url = hit.url || hit.story_url;
       objectNews.delete_date = null;
-      objectNews.story_id = hit.story_id.toString();
+      objectNews.story_id = hit.story_id;
       if (
         objectNews.author === null ||
         objectNews.date === null ||
@@ -36,15 +35,13 @@ export class NewsService {
       ) {
         continue;
       }
-      const news = await this.newsRepository.create(objectNews);
-      objectNews.id = news._id.toString();
       await validateOrReject(objectNews);
       newsList.push(objectNews);
     }
     return newsList;
   }
 
-  async softDelete(story_id: string) {
+  async softDelete(story_id: number) {
     try {
       const selectedNews = await this.newsRepository.delete(story_id);
     } catch (error) {

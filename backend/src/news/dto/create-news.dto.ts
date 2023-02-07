@@ -1,9 +1,15 @@
-import { IsString, IsDateString, IsNotEmpty } from 'class-validator';
+import {
+  IsString,
+  IsDateString,
+  IsNotEmpty,
+  IsOptional,
+  IsNumber,
+} from 'class-validator';
 
 export class CreateNewsDto {
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  id: string;
+  story_id: number;
 
   @IsString()
   @IsNotEmpty()
@@ -21,6 +27,6 @@ export class CreateNewsDto {
   @IsNotEmpty()
   date: string;
 
+  @IsOptional()
   delete_date: string;
-  story_id: string;
 }

@@ -16,7 +16,7 @@ export class MongoNewsRepository {
     return createNews.save();
   }
 
-  delete(story_id: string) {
+  delete(story_id: number) {
     return this.hackerNewsModel.findOneAndUpdate(
       { story_id: story_id },
       { delete_date: new Date() },

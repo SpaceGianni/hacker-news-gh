@@ -11,7 +11,7 @@ export class NewsController {
   }
 
   @Delete(':story_id')
-  removeOne(@Param('story_id') story_id: string) {
+  removeOne(@Param('story_id') story_id: number) {
     return this.newsService.softDelete(story_id);
   }
 

@@ -11,7 +11,7 @@ import { CronModule } from './cron/cron.module';
   imports: [
     ScheduleModule.forRoot(),
     CronModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/hknews'),
+    MongooseModule.forRoot('mongodb://mongo-hn:27017/hknews'),
     NewsModule,
     HttpModule,
   ],

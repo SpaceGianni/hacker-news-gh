@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
 import Layout, {
   siteTitle,
   subtitleSite_part1,
@@ -23,9 +22,11 @@ export default function Home() {
           title2={subtitleSite_part1 + " " + heart + " " + subtitleSite_part2}>
         </HeaderTitles>
       </Header>
-      <body>
+      <div>
         <NewsList></NewsList>
-      </body>
+      </div>
+
+
 
     </Layout>
   </>);
