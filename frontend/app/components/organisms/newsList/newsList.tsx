@@ -6,6 +6,7 @@ import { NewsInterface } from "../../../news.interface";
 import News from "../../molecules/newsText/news";
 import { getNews, deleteNews } from "../../../utils/news.services";
 import styles from "./newsList.module.css";
+import { TrashFill } from "react-bootstrap-icons";
 
 export default function NewsList() {
   const [news, setNews] = useState<NewsInterface[]>([]);
@@ -37,12 +38,17 @@ export default function NewsList() {
                 {oneNew.title}
               </a>
             </h2>
-            <p className={styles.newsAuthor}>-{oneNew.author}</p>
-            <p className={styles.newsTitle}>{oneNew.date}</p>
-            <span
-              className="material-symbols-outlined"
+            <p className={styles.newsAuthor}>- {oneNew.author} -</p>
+            <div className={styles.date}>
+              <p>{oneNew.date}</p>
+            </div>
+
+            <div
+              className={styles.trashCan}
               onClick={() => removeNews(news, oneNew.id)}
-            ></span>
+            >
+              <TrashFill color="RGB(229 21 74)" size={"2rem"} />
+            </div>
           </News>
         ))}
       </div>

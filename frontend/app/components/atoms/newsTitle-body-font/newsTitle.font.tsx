@@ -1,6 +1,6 @@
-import { Oswald } from "@next/font/google";
+import { Barlow_Condensed } from "@next/font/google";
 
-const title2Font = Oswald({
+const title2Font = Barlow_Condensed({
   weight: "200",
   style: ["normal"],
   subsets: ["latin"],

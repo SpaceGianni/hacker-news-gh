@@ -1,9 +1,8 @@
-.newsTitle {
-  size: 13pt;
-  color: #333;
-}
-
-.newsAuthor {
-  size: 10px;
-  color: #999;
+.newsTexts {
+  margin-left: 30px;
+  display: flex;
+  margin-top: 15px;
+  align-items: center;
+  border-bottom: 1px solid lightgrey;
+  padding-bottom: 20px;
 }
