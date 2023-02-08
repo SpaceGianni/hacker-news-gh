@@ -7,6 +7,7 @@ import News from "../../molecules/newsText/news";
 import { getNews, deleteNews } from "../../../utils/news.services";
 import styles from "./newsList.module.css";
 import { TrashFill } from "react-bootstrap-icons";
+import { FormatDate } from "../../../utils/daysJsFormat";
 
 export default function NewsList() {
   const [news, setNews] = useState<NewsInterface[]>([]);
@@ -40,7 +41,7 @@ export default function NewsList() {
             </h2>
             <p className={styles.newsAuthor}>- {oneNew.author} -</p>
             <div className={styles.date}>
-              <p>{oneNew.date}</p>
+              <p>{FormatDate(oneNew.date)}</p>
             </div>
 
             <div
