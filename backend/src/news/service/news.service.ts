@@ -2,6 +2,8 @@ import {
   Injectable,
   Logger,
   InternalServerErrorException,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { CreateNewsDto } from '../dto/create-news.dto';
 import { NewsProvider } from '../provider/rawNews.provider';
@@ -14,6 +16,18 @@ export class NewsService {
     private readonly newsProvider: NewsProvider,
     private readonly newsRepository: MongoNewsRepository,
   ) {}
+
+  async findAll() {
+    try {
+      return await this.newsRepository.getAll();
+    } catch (error) {
+      throw new HttpException(
+        { status: HttpStatus.INTERNAL_SERVER_ERROR, error: error.message },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        { cause: error },
+      );
+    }
+  }
 
   async findAndSaveNews(): Promise<CreateNewsDto[]> {
     const newsList = [];
@@ -31,7 +45,8 @@ export class NewsService {
         objectNews.date === null ||
         objectNews.title === null ||
         objectNews.url === null ||
-        objectNews.story_id === null
+        objectNews.story_id === null ||
+        objectNews.created_at === null
       ) {
         continue;
       }
@@ -41,14 +56,16 @@ export class NewsService {
     return newsList;
   }
 
-  async softDelete(story_id: number) {
+  async softDelete(story_id: string) {
     try {
       const selectedNews = await this.newsRepository.delete(story_id);
+      return selectedNews;
     } catch (error) {
       new Logger('Cannot delete the news');
       throw new InternalServerErrorException('The was a Database Error');
     }
   }
+
   async getNews() {
     const news = await this.newsRepository.get();
     return news;

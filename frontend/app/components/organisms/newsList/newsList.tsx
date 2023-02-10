@@ -12,13 +12,9 @@ import { FormatDate } from "../../../utils/daysJsFormat";
 export default function NewsList() {
   const [news, setNews] = useState<NewsInterface[]>([]);
 
-  const removeNews = (news: NewsInterface[], id: number) => {
-    deleteNews(+id);
-    setNews(
-      news.filter((selectedNews: any) => {
-        return selectedNews.id !== id;
-      })
-    );
+  const removeNews = (story_id: string) => {
+    deleteNews(story_id);
+    getNews().then((news) => setNews(news));
   };
 
   useEffect(() => {
@@ -26,7 +22,7 @@ export default function NewsList() {
   }, []);
 
   if (!news.length) {
-    return <h1>News are loading...</h1>;
+    return <h1 color={"green"}>News are loading...</h1>;
   }
 
   return (
@@ -43,10 +39,9 @@ export default function NewsList() {
             <div className={styles.date}>
               <p>{FormatDate(oneNew.date)}</p>
             </div>
-
             <div
               className={styles.trashCan}
-              onClick={() => removeNews(news, oneNew.id)}
+              onClick={() => removeNews(oneNew.story_id)}
             >
               <TrashFill color="RGB(229 21 74)" size={"2rem"} />
             </div>

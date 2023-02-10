@@ -15,14 +15,15 @@
 }
 
 .newsAuthor {
-  size: 10rem;
-  color: #565050;
+  color: #c2baba;
   margin-left: 15px;
+  font-size: 1.5rem;
 }
 
 .date {
   position: absolute;
   right: 400px;
+  font-size: 1.5rem;
 }
 
 .trashCan {

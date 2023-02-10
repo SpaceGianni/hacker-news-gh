@@ -7,11 +7,11 @@ export class NewsController {
 
   @Get()
   findAll() {
-    return this.newsService.findAndSaveNews();
+    return this.newsService.findAll();
   }
 
   @Delete(':story_id')
-  removeOne(@Param('story_id') story_id: number) {
+  removeOne(@Param('story_id') story_id: string) {
     return this.newsService.softDelete(story_id);
   }
 

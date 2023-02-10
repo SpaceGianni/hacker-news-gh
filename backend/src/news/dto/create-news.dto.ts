@@ -4,6 +4,7 @@ import {
   IsNotEmpty,
   IsOptional,
   IsNumber,
+  IsDate,
 } from 'class-validator';
 
 export class CreateNewsDto {
@@ -23,10 +24,10 @@ export class CreateNewsDto {
   @IsNotEmpty()
   url: string;
 
-  @IsDateString()
+  @IsDate()
   @IsNotEmpty()
-  date: string;
+  date: Date;
 
   @IsOptional()
-  delete_date: string;
+  delete_date: Date;
 }

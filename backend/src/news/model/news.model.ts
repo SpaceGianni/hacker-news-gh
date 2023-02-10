@@ -4,6 +4,9 @@ import { Document } from 'mongoose';
 @Schema()
 export class News extends Document {
   @Prop()
+  created_at: Date;
+
+  @Prop()
   title: string;
 
   @Prop()
@@ -11,9 +14,6 @@ export class News extends Document {
 
   @Prop()
   url: string;
-
-  @Prop()
-  date: Date;
 
   @Prop()
   story_id: string;

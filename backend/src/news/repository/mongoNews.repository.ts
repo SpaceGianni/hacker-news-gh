@@ -10,17 +10,28 @@ export class MongoNewsRepository {
     @InjectModel(News.name) private readonly hackerNewsModel: Model<News>,
   ) {}
 
-  create(createNewsDto: CreateNewsDto) {
+  getAll(): Promise<News[]> {
+    return this.hackerNewsModel.find().exec();
+  }
+
+  /*   create(createNewsDto: CreateNewsDto) {
     Promise<News>;
     const createNews = new this.hackerNewsModel(createNewsDto);
     return createNews.save();
-  }
+  } */
 
-  delete(story_id: number) {
+  delete(story_id: string) {
     return this.hackerNewsModel.findOneAndUpdate(
       { story_id: story_id },
-      { delete_date: new Date() },
+      { $set: { delete_date: new Date() } },
       { returnDocument: 'after' },
+      function (err, docs) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log('Original doc: ', docs);
+        }
+      },
     );
   }
 
