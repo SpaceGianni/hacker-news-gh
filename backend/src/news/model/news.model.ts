@@ -3,8 +3,11 @@ import { Document } from 'mongoose';
 
 @Schema()
 export class News extends Document {
+  @Prop({ index: true, unique: true })
+  story_id: number;
+
   @Prop()
-  created_at: Date;
+  created_at: string;
 
   @Prop()
   title: string;
@@ -15,10 +18,7 @@ export class News extends Document {
   @Prop()
   url: string;
 
-  @Prop()
-  story_id: string;
-
-  @Prop()
+  @Prop({ default: null })
   delete_date: Date;
 }
 

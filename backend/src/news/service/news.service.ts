@@ -8,7 +8,9 @@ import {
 import { CreateNewsDto } from '../dto/create-news.dto';
 import { NewsProvider } from '../provider/rawNews.provider';
 import { MongoNewsRepository } from '../repository/mongoNews.repository';
-import { validateOrReject } from 'class-validator';
+import { validate } from 'class-validator';
+import { plainToClass } from 'class-transformer';
+import { inspect } from 'util';
 
 @Injectable()
 export class NewsService {
@@ -29,34 +31,26 @@ export class NewsService {
     }
   }
 
-  async findAndSaveNews(): Promise<CreateNewsDto[]> {
-    const newsList = [];
+  async findAndSaveNews(): Promise<void> {
     const { hits } = await this.newsProvider.findAll();
     for (const hit of hits) {
-      const objectNews = new CreateNewsDto();
-      objectNews.author = hit.author;
-      objectNews.date = hit.created_at;
-      objectNews.title = hit.story_title || hit.title;
-      objectNews.url = hit.url || hit.story_url;
-      objectNews.delete_date = null;
-      objectNews.story_id = hit.story_id;
-      if (
-        objectNews.author === null ||
-        objectNews.date === null ||
-        objectNews.title === null ||
-        objectNews.url === null ||
-        objectNews.story_id === null ||
-        objectNews.created_at === null
-      ) {
-        continue;
+      const objectToSave = {
+        story_id: hit.story_id,
+        title: hit.story_title || hit.title,
+        author: hit.author,
+        date: hit.created_at,
+        url: hit.story_url || hit.url,
+      };
+      const newsDto = plainToClass(CreateNewsDto, objectToSave);
+      const errors = await validate(newsDto, { whitelist: true });
+      if (errors.length) {
+        new Logger('Error with creation of objects');
+        throw new Error(inspect(errors));
       }
-      await validateOrReject(objectNews);
-      newsList.push(objectNews);
     }
-    return newsList;
   }
 
-  async softDelete(story_id: string) {
+  async softDelete(story_id: number) {
     try {
       const selectedNews = await this.newsRepository.delete(story_id);
       return selectedNews;

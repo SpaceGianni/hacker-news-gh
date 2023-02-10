@@ -6,12 +6,12 @@ export class NewsController {
   constructor(private readonly newsService: NewsService) {}
 
   @Get()
-  findAll() {
-    return this.newsService.findAll();
+  GetAllNews() {
+    return this.newsService.findAndSaveNews();
   }
 
   @Delete(':story_id')
-  removeOne(@Param('story_id') story_id: string) {
+  removeOne(@Param('story_id') story_id: number) {
     return this.newsService.softDelete(story_id);
   }
 

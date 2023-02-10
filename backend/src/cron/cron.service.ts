@@ -1,9 +1,9 @@
-import { Injectable, Logger, Inject } from '@nestjs/common';
+import { Injectable, Logger, Inject, OnModuleInit } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { NewsService } from 'src/news/service/news.service';
 
 @Injectable()
-export class TasksService {
+export class TasksService implements OnModuleInit {
   constructor(
     @Inject(NewsService)
     private readonly newsService: NewsService,
@@ -11,9 +11,14 @@ export class TasksService {
 
   private readonly logger = new Logger(TasksService.name);
 
-  @Cron(CronExpression.EVERY_10_SECONDS)
-  handleCron() {
-    this.logger.debug('Called every 12 hours');
-    return this.newsService.findAll();
+  async onModuleInit(): Promise<any> {
+    this.logger.debug('Called on module init');
+    await this.newsService.findAndSaveNews();
+  }
+
+  @Cron(CronExpression.EVERY_30_SECONDS)
+  async handleCron() {
+    this.logger.debug('Called every 30 seconds');
+    return this.newsService.findAndSaveNews();
   }
 }
