@@ -19,6 +19,6 @@ export class TasksService implements OnModuleInit {
   @Cron(CronExpression.EVERY_30_SECONDS)
   async handleCron() {
     this.logger.debug('Called every 30 seconds');
-    return this.newsService.findAndSaveNews();
+    await this.newsService.findAndSaveNews();
   }
 }

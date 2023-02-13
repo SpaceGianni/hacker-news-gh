@@ -33,7 +33,10 @@ export class NewsService {
 
   async findAndSaveNews(): Promise<void> {
     const { hits } = await this.newsProvider.findAll();
-    for (const hit of hits) {
+    const logger = new Logger(NewsService.name);
+    logger.debug('Inside find and save news');
+
+    const arrayOfPromises = hits.map(async (hit) => {
       const objectToSave = {
         story_id: hit.story_id,
         title: hit.story_title || hit.title,
@@ -42,11 +45,25 @@ export class NewsService {
         url: hit.story_url || hit.url,
       };
       const newsDto = plainToClass(CreateNewsDto, objectToSave);
-      const errors = await validate(newsDto, { whitelist: true });
+      const errors = await validate(newsDto, {
+        whitelist: true,
+        skipNullProperties: true,
+      });
+
       if (errors.length) {
-        new Logger('Error with creation of objects');
-        throw new Error(inspect(errors));
+        logger.debug('Fail to save new', errors);
+        return;
       }
+      logger.debug('Before saving news');
+      await this.newsRepository.updateOrCreateIfNotExits(
+        objectToSave.story_id,
+        newsDto,
+      );
+    });
+    try {
+      await Promise.all(arrayOfPromises);
+    } catch (error) {
+      logger.error("don't");
     }
   }
 

@@ -7,7 +7,7 @@ export class NewsController {
 
   @Get()
   GetAllNews() {
-    return this.newsService.findAndSaveNews();
+    return this.newsService.findAll();
   }
 
   @Delete(':story_id')
