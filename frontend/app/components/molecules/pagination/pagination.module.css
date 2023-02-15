@@ -1,0 +1,28 @@
+.navigation {
+  background-color: rgb(26, 126, 93);
+  width: 100%;
+  color: white;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+}
+.pagination {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+
+.pageItem {
+  padding: 2em;
+}
+
+.pageItem:hover {
+  padding: 2em;
+  background-color: rgb(15, 72, 53);
+}
+
+.pageLink {
+  color: white;
+  text-decoration: none;
+}

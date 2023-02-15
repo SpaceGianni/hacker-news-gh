@@ -9,6 +9,7 @@ import Layout, {
 import Header from "../app/components/organisms/header/header.tsx";
 import HeaderTitles from "../app/components/molecules/headerTitles/headerTitles.tsx";
 import NewsList from "../app/components/organisms/newsList/newsList.tsx";
+import Pagination from "../../frontend/app/components/molecules/pagination/pagination.tsx";
 
 export default function Home() {
   return (<>
@@ -23,6 +24,7 @@ export default function Home() {
       </Header>
       <div>
         <NewsList></NewsList>
+        <Pagination></Pagination>
       </div>
     </Layout>
   </>);
