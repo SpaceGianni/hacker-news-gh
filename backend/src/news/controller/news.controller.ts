@@ -1,6 +1,7 @@
-import { Controller, Get, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Param, Delete, Query } from '@nestjs/common';
 import { NewsService } from '../service/news.service';
 import { MongoNewsRepository } from '../repository/mongoNews.repository';
+import { PaginationQueryDto } from '../dto/pagination-query.dto';
 
 @Controller('news')
 export class NewsController {
@@ -20,7 +21,7 @@ export class NewsController {
   }
 
   @Get('updated')
-  getUpdatedNews() {
-    return this.mongoRepo.findAllNullDates();
+  getUpdatedNews(@Query() pagination: PaginationQueryDto) {
+    return this.mongoRepo.findAllNullDates(pagination);
   }
 }

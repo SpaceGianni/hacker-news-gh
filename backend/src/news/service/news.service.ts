@@ -42,7 +42,6 @@ export class NewsService {
         author: hit.author,
         date: hit.created_at,
         url: hit.story_url || hit.url,
-        delete_date: null,
       };
 
       const newsDto = plainToClass(CreateNewsDto, oneObjectWithNews);

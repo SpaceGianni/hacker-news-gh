@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateNewsDto } from '../dto/create-news.dto';
 import { News } from '../model/news.model';
+import { PaginationQueryDto } from '../dto/pagination-query.dto';
 
 @Injectable()
 export class MongoNewsRepository {
@@ -42,7 +43,13 @@ export class MongoNewsRepository {
       .exec();
   }
 
-  findAllNullDates() {
-    return this.hackerNewsModel.find({ delete_date: null });
+  findAllNullDates({ limit, offset }: PaginationQueryDto) {
+    return this.hackerNewsModel
+      .find({
+        delete_date: null,
+      })
+      .limit(limit)
+      .skip(offset)
+      .exec();
   }
 }
