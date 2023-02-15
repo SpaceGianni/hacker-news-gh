@@ -1,5 +1,5 @@
 export interface NewsInterface {
-  story_id: string;
+  _id: string;
   date: string;
   title: string;
   url: string;

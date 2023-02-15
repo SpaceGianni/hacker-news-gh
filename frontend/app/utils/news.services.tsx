@@ -13,7 +13,9 @@ export const getNews = async (): Promise<NewsInterface[]> => {
 export const deleteNews = async (id: string) => {
   const url =
     process.env.NEXT_PUBLIC_SERVER_URL_BACKEND || "http://localhost:8000/";
-  const response = await axios.delete(`${url}news/${id}`);
-  const info = await response;
-  return info;
+  if (window.confirm("Are you sure you want to remove the news?")) {
+    const response = await axios.delete(`${url}news/${id}`);
+    const info = await response;
+    return info;
+  }
 };

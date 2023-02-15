@@ -10,7 +10,6 @@ import { NewsProvider } from '../provider/rawNews.provider';
 import { MongoNewsRepository } from '../repository/mongoNews.repository';
 import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
-import { inspect } from 'util';
 
 @Injectable()
 export class NewsService {
@@ -21,7 +20,7 @@ export class NewsService {
 
   async findAll() {
     try {
-      return await this.newsRepository.getAll();
+      return await this.newsRepository.getAllNews();
     } catch (error) {
       throw new HttpException(
         { status: HttpStatus.INTERNAL_SERVER_ERROR, error: error.message },
@@ -31,54 +30,56 @@ export class NewsService {
     }
   }
 
-  async findAndSaveNews(): Promise<void> {
-    const { hits } = await this.newsProvider.findAll();
+  async findAndSaveNews(): Promise<CreateNewsDto[]> {
     const logger = new Logger(NewsService.name);
-    logger.debug('Inside find and save news');
+    const { hits } = await this.newsProvider.findAll();
+    const newsList = [];
 
-    const arrayOfPromises = hits.map(async (hit) => {
-      const objectToSave = {
-        story_id: hit.story_id,
+    for (let hit of hits) {
+      let oneObjectWithNews = {
+        objId: hit.objectID,
         title: hit.story_title || hit.title,
         author: hit.author,
         date: hit.created_at,
         url: hit.story_url || hit.url,
+        delete_date: null,
       };
-      const newsDto = plainToClass(CreateNewsDto, objectToSave);
+
+      const newsDto = plainToClass(CreateNewsDto, oneObjectWithNews);
       const errors = await validate(newsDto, {
         whitelist: true,
         skipNullProperties: true,
       });
-
       if (errors.length) {
-        logger.debug('Fail to save new', errors);
+        logger.debug('Fail to save a news object', errors);
         return;
       }
-      logger.debug('Before saving news');
-      await this.newsRepository.updateOrCreateIfNotExits(
-        objectToSave.story_id,
-        newsDto,
-      );
-    });
-    try {
-      await Promise.all(arrayOfPromises);
-    } catch (error) {
-      logger.error("don't");
+      try {
+        await this.newsRepository.updateOrCreateIfNotExits(
+          oneObjectWithNews.objId,
+          newsDto,
+        );
+      } catch (error) {
+        logger.error('Error creating or updating the news in mongodb');
+        logger.error(error);
+      }
+
+      try {
+        newsList.push(oneObjectWithNews);
+      } catch (error) {
+        logger.error('Fail to push an object in the final array ');
+      }
     }
+    return newsList;
   }
 
-  async softDelete(story_id: number) {
+  async softDelete(id: string) {
     try {
-      const selectedNews = await this.newsRepository.delete(story_id);
-      return selectedNews;
+      return await this.newsRepository.deleteOneNews(id);
     } catch (error) {
+      console.log(error);
       new Logger('Cannot delete the news');
       throw new InternalServerErrorException('The was a Database Error');
     }
-  }
-
-  async getNews() {
-    const news = await this.newsRepository.get();
-    return news;
   }
 }

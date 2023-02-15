@@ -12,8 +12,8 @@ import { FormatDate } from "../../../utils/daysJsFormat";
 export default function NewsList() {
   const [news, setNews] = useState<NewsInterface[]>([]);
 
-  const removeNews = (story_id: string) => {
-    deleteNews(story_id);
+  const removeNews = async (_id: string) => {
+    await deleteNews(_id);
     getNews().then((news) => setNews(news));
   };
 
@@ -22,7 +22,7 @@ export default function NewsList() {
   }, []);
 
   if (!news.length) {
-    return <h1 color={"green"}>News are loading...</h1>;
+    return <h1>News are loading...</h1>;
   }
 
   return (
@@ -41,7 +41,7 @@ export default function NewsList() {
             </div>
             <div
               className={styles.trashCan}
-              onClick={() => removeNews(oneNew.story_id)}
+              onClick={() => removeNews(oneNew._id)}
             >
               <TrashFill color="RGB(229 21 74)" size={"2rem"} />
             </div>

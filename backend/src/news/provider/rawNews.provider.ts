@@ -21,18 +21,4 @@ export class NewsProvider {
     );
     return data;
   }
-
-  async findAllHits(): Promise<Hit> {
-    const { data } = await firstValueFrom(
-      this.httpService.get(
-        'https://hn.algolia.com/api/v1/search_by_date?query=nodejs',
-        {
-          headers: {
-            'Accept-Encoding': '*',
-          },
-        },
-      ),
-    );
-    return data;
-  }
 }

@@ -2,29 +2,29 @@ import {
   IsString,
   IsNotEmpty,
   IsOptional,
-  IsNumber,
   IsDateString,
 } from 'class-validator';
 
 export class CreateNewsDto {
-  @IsNumber()
-  story_id: number;
+  @IsNotEmpty()
+  @IsString()
+  objId: string;
 
-  //@IsNotEmpty()
+  @IsNotEmpty()
   @IsString()
   title: string;
 
-  //@IsNotEmpty()
+  @IsNotEmpty()
   @IsString()
   author: string;
 
-  //@IsNotEmpty()
+  @IsNotEmpty()
   @IsString()
   url: string;
 
-  //@IsNotEmpty()
-  @IsDateString()
-  date: Date;
+  @IsNotEmpty()
+  @IsString()
+  date: string;
 
   @IsOptional()
   delete_date: string;
