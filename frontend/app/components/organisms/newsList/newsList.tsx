@@ -4,7 +4,7 @@ import React from "react";
 import News from "../../molecules/newsText/news";
 import styles from "./newsList.module.css";
 import { TrashFill } from "react-bootstrap-icons";
-import { FormatDate } from "../../../utils/daysJsFormat";
+import { newConvertDate } from "../../../utils/daysJsFormat";
 import { NewsInterface } from "../../../news.interface";
 
 export default function NewsList({
@@ -33,7 +33,7 @@ export default function NewsList({
             </h2>
             <p className={styles.newsAuthor}>- {oneNew.author} -</p>
             <div className={styles.date}>
-              <p>{FormatDate(oneNew.date)}</p>
+              <p>{newConvertDate(oneNew.date)}</p>
             </div>
             <div
               className={styles.trashCan}

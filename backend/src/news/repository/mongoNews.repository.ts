@@ -50,6 +50,7 @@ export class MongoNewsRepository {
       })
       .limit(limit)
       .skip(offset)
+      .sort({ date: -1 })
       .exec();
   }
 }
