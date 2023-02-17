@@ -12,13 +12,11 @@ export class TasksService implements OnModuleInit {
   private readonly logger = new Logger(TasksService.name);
 
   async onModuleInit(): Promise<any> {
-    this.logger.debug('Called on module init');
     await this.newsService.findAndSaveNews();
   }
 
   @Cron(CronExpression.EVERY_30_SECONDS)
   async handleCron() {
-    this.logger.debug('Called every 30 seconds');
     await this.newsService.findAndSaveNews();
   }
 }

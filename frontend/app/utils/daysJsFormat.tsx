@@ -14,12 +14,12 @@ dayjs.updateLocale("en", {
     mm: "today",
     h: "today",
     hh: "today",
-    d: "Yesterday",
-    dd: "past",
-    M: "past",
-    MM: "past",
-    y: "past",
-    yy: "past",
+    d: "yesterday",
+    dd: "%d",
+    M: "%d",
+    MM: "%d",
+    y: "%d",
+    yy: "%d",
   },
 });
 
@@ -36,7 +36,7 @@ export function FormatDate(date: string | number) {
   }
 
   if (dateFormated === "past") {
-    dateFormated = dayjs(date).format("MMM DD");
+    dateFormated = dayjs(date).format("MM DD YYYY");
   }
   return dateFormated;
 }

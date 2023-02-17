@@ -10,8 +10,28 @@ import Header from "../app/components/organisms/header/header.tsx";
 import HeaderTitles from "../app/components/molecules/headerTitles/headerTitles.tsx";
 import NewsList from "../app/components/organisms/newsList/newsList.tsx";
 import Pagination from "../../frontend/app/components/molecules/pagination/pagination.tsx";
+import React, { useState, useEffect } from "react";
+import { deleteNews, getNews } from "../app/utils/news.services.tsx";
 
 export default function Home() {
+  const [limit, setLimit] = useState(16);
+  const [offset, setOffSet] = useState(0);
+  const [news, setNews] = useState([]);
+
+  useEffect(() => {
+    getNews(offset, limit).then((news) => setNews(news));
+  }, []);
+
+  useEffect(() => {
+    getNews(offset, limit).then((news) => setNews(news));
+  }, [limit, offset]);
+
+  const removeNews = async (_id) => {
+    await deleteNews(_id);
+    getNews(offset, limit).then((news) => setNews(news));
+  };
+
+
   return (<>
     <Layout>
       <Head>
@@ -23,8 +43,8 @@ export default function Home() {
         </HeaderTitles>
       </Header>
       <div>
-        <NewsList></NewsList>
-        <Pagination></Pagination>
+        <NewsList limit={limit} offset={offset} news={news} setNews={setNews} removeNews={removeNews}></NewsList>
+        <Pagination limit={limit} setLimit={setLimit} offset={offset} setOffSet={setOffSet}></Pagination>
       </div>
     </Layout>
   </>);

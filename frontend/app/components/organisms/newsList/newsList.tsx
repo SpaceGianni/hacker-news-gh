@@ -1,26 +1,22 @@
 "use client";
 
 import React from "react";
-import { useState, useEffect } from "react";
-import { NewsInterface } from "../../../news.interface";
 import News from "../../molecules/newsText/news";
-import { getNews, deleteNews } from "../../../utils/news.services";
 import styles from "./newsList.module.css";
 import { TrashFill } from "react-bootstrap-icons";
 import { FormatDate } from "../../../utils/daysJsFormat";
+import { NewsInterface } from "../../../news.interface";
 
-export default function NewsList() {
-  const [news, setNews] = useState<NewsInterface[]>([]);
-
-  const removeNews = async (_id: string) => {
-    await deleteNews(_id);
-    getNews().then((news) => setNews(news));
-  };
-
-  useEffect(() => {
-    getNews().then((news) => setNews(news));
-  }, []);
-
+export default function NewsList({
+  news,
+  removeNews,
+}: {
+  limit: number;
+  offset: number;
+  news: NewsInterface[];
+  setNews: Function;
+  removeNews: Function;
+}) {
   if (!news.length) {
     return <h1>News are loading...</h1>;
   }
@@ -30,7 +26,7 @@ export default function NewsList() {
       <div className={styles.newsList}>
         {news.map((oneNew, index) => (
           <News key={index + 1}>
-            <h2>
+            <h2 className={styles.newsTitle}>
               <a className={styles.newsTitle} href={oneNew.url} target="_blank">
                 {oneNew.title}
               </a>

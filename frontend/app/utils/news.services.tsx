@@ -3,9 +3,14 @@
 import { NewsInterface } from "../news.interface";
 const axios = require("axios").default;
 
-export const getNews = async (): Promise<NewsInterface[]> => {
+export const getNews = async (
+  offset: number,
+  limit: number
+): Promise<NewsInterface[]> => {
   const url = process.env.NEXT_PUBLIC_SERVER_URL_BACKEND;
-  const response = await axios.get(`${url}news/updated`);
+  const response = await axios.get(
+    `${url}news/updated?offset=${offset}&limit=${limit}`
+  );
   const info = await response.data;
   return info;
 };
