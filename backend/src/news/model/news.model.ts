@@ -7,7 +7,7 @@ export class News extends Document {
   objId: string;
 
   @Prop()
-  created_at: string;
+  date: string;
 
   @Prop()
   title: string;

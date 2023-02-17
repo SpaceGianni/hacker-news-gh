@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 import { AlgoliaResponse } from '../interfaces/rawNews.interface';
-import { Hit } from '../interfaces/rawNews.interface';
 
 @Injectable()
 export class NewsProvider {

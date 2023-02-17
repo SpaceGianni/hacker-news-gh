@@ -19,6 +19,8 @@ export default function Pagination({
     limit: limit,
   });
 
+  const [firstPage, setFirstPage] = useState(true);
+
   async function bringPreviousPage() {
     try {
       if (actualPagination.offset < 16) {
@@ -118,31 +120,38 @@ export default function Pagination({
     <>
       <div className={styles.navigation + " " + title1Font.className}>
         <ul className={styles.pagination}>
-          <li className={styles.pageItem} onClick={() => bringPreviousPage()}>
-            <a className={styles.pageLink} href="/">
-              Previous
-            </a>
-          </li>
-          <li className={styles.pageItem} onClick={() => bringFirstPage()}>
-            <a className={styles.pageLink} href="/">
-              1
-            </a>
-          </li>
+          {offset === 0 ? (
+            <>
+              <li className={styles.pageItem} onClick={() => bringFirstPage()}>
+                <a className={styles.pageLink} href="#">
+                  1
+                </a>
+              </li>
+            </>
+          ) : (
+            <li className={styles.pageItem} onClick={() => bringPreviousPage()}>
+              <a className={styles.pageLink} href="#">
+                Previous
+              </a>
+            </li>
+          )}
           <li className={styles.pageItem} onClick={() => bringSecondPage()}>
-            <a className={styles.pageLink} href="/">
+            <a className={styles.pageLink} href="#">
               2
             </a>
           </li>
           <li className={styles.pageItem} onClick={() => bringThirdPage()}>
-            <a className={styles.pageLink} href="/">
+            <a className={styles.pageLink} href="#">
               3
             </a>
           </li>
-          <li className={styles.pageItem} onClick={() => bringNextPage()}>
-            <a className={styles.pageLink} href="/">
-              Next
-            </a>
-          </li>
+          {offset !== 64 && (
+            <li className={styles.pageItem} onClick={() => bringNextPage()}>
+              <a className={styles.pageLink} href="#">
+                Next
+              </a>
+            </li>
+          )}
         </ul>
       </div>
     </>

@@ -32,7 +32,7 @@ export function FormatDate(date: string | number) {
   let dateFormated = ConvertDate(date);
 
   if (dateFormated === "today") {
-    dateFormated = dayjs(date).format("HH:mm");
+    dateFormated = dayjs(date).format("DD MMM");
   }
 
   if (dateFormated === "past") {
