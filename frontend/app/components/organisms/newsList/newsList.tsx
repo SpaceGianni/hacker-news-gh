@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import News from "../../molecules/newsText/news";
+import News from "../../molecules/news/news";
 import styles from "./newsList.module.css";
 import { TrashFill } from "react-bootstrap-icons";
 import { newConvertDate } from "../../../utils/daysJsFormat";

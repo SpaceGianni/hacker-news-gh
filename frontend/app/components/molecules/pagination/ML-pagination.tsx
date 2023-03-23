@@ -1,5 +1,4 @@
 import styles from "./pagination.module.css";
-import title1Font from "../../atoms/title1-header-font/title1.font";
 import React, { useState } from "react";
 import { getNews } from "../../../utils/news.services";
 
