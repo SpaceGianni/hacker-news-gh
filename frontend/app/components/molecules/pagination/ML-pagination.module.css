@@ -1,11 +1,7 @@
 .navigation {
-  background-color: rgb(26, 126, 93);
-  width: 100%;
-  color: white;
-  height: 100px;
-  display: flex;
-  justify-content: center;
+  margin: auto;
 }
+
 .pagination {
   color: white;
   display: flex;

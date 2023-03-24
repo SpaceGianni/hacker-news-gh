@@ -1,4 +1,5 @@
 import { NewsInterface } from "../news.interface";
+import React, { useState } from "react";
 
 const axios = require("axios").default;
 let infoLength: number = 1;
@@ -13,12 +14,3 @@ export const getUpdatedNews = async (): Promise<NewsInterface[]> => {
   console.log("infoLength", infoLength, "returnedData", returnedData);
   return returnedData;
 };
-
-let total_no_of_items: number = infoLength;
-const items_per_page = 16;
-let num_of_pages = total_no_of_items / items_per_page;
-
-let page_number: number = 1;
-let items_to_skip = (page_number - 1) * items_per_page;
-let items = returnedData.slice(items_to_skip, items_to_skip + items_per_page);
-console.log(items);

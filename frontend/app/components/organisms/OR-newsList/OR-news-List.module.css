@@ -1,0 +1,11 @@
+.newsList {
+  margin-top: 20px;
+  width: 100%;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: grid;
+  grid-auto-rows: auto;
+  position: relative;
+  height: 500px;
+}

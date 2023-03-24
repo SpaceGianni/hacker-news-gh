@@ -1,6 +1,6 @@
 .title1 {
   font-size: 100px;
-  padding-top: 60px;
+  padding-top: 10px;
   color: white;
   margin-left: 20px;
 }
@@ -8,5 +8,9 @@
 .title2 {
   font-size: 42px;
   color: white;
-  margin-left: 32px;
+  margin-left: 20px;
+}
+
+.container {
+  display: flex;
 }
