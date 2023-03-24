@@ -13,15 +13,13 @@ export default function NewsList({ finalArraywithNews }) {
     <>
       <div className={styles.newsList}>
         {finalArraywithNews.map((item, index) => (
-          <>
-            <News
-              key={index + 1}
-              name={item.name}
-              author={item.author}
-              date={item.date}
-              link={item.link}
-            ></News>
-          </>
+          <News
+            key={index}
+            name={item.name}
+            author={item.author}
+            date={item.date}
+            link={item.link}
+          ></News>
         ))}
       </div>
     </>

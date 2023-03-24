@@ -4,6 +4,8 @@ import NewsList from "./../app/components/organisms/OR-newsList/OR-newsList.tsx"
 import Footer from "../app/components/organisms/OR-Footer/OR-footer.tsx";
 
 export default function Home() {
+
+
   const [siteTitle, setSiteTitle] = useState("HN feed");
   const [subtitleSite_part1, setSubtitleSite_part1] = useState("We");
   const [subtitleSite_part2, setSubtitleSite_part2] = useState("hacker news!");
@@ -102,27 +104,25 @@ export default function Home() {
     return array_positions;
   };
 
-  const [finalArraywithNews, setFinalArraywithNews] = useState([]);
+  createPages();
+  findNewsPositionPerPage();
+
+
 
   let initialPosition = array_positions[0];
   let finalPosition = array_positions[array_positions.length - 1] + 1;
 
-  function createArrayOfNews() {
-    setFinalArraywithNews(news.slice(initialPosition, finalPosition));
-    return
-  }
+  const [finalArraywithNews, setFinalArraywithNews] = useState(
+    news.slice(initialPosition, finalPosition)
+  );
 
 
-  useEffect(() => {
-    createPages();
-    findNewsPositionPerPage();
-    createArrayOfNews()
 
-  });
+  console.log("array_positions", array_positions)
+  console.log("initialPosition", initialPosition)
+  console.log("finalPosition", finalPosition)
+  console.log("finalArraywithNews", finalArraywithNews)
 
-  useEffect(() => {
-
-  }, finalArraywithNews)
 
   return (
     <>
