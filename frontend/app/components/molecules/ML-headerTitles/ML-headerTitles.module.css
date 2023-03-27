@@ -3,14 +3,22 @@
   padding-top: 10px;
   color: white;
   margin-left: 20px;
+  font-family: "Italiana";
 }
 
 .title2 {
   font-size: 42px;
   color: white;
   margin-left: 20px;
+  font-family: "Italiana";
 }
 
 .container {
   display: flex;
+}
+
+@font-face {
+  font-family: "Italiana";
+  src: url("../../../../public/Italiana/Italiana-Regular.ttf");
+  font-weight: 400;
 }
