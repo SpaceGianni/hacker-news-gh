@@ -1,11 +1,11 @@
 @font-face {
   font-family: "Roboto";
   src: url("../../../../public/Roboto/Roboto-Thin.ttf");
-  font-weight: 400;
+  font-weight: 200;
 }
 
 .newsTitle {
-  size: 13rem;
+  size: 7rem;
   color: #0b0a0a;
   text-decoration: none;
   font-family: "Roboto", sans-serif;
@@ -13,23 +13,29 @@
 
 .newsAuthor {
   color: #c2baba;
-  margin-left: 15px;
+  margin-left: 70px;
   font-size: 1.5rem;
   font-family: "Roboto", sans-serif;
-  font-weight: 400;
 }
 
 .date {
   position: absolute;
-  right: 600px;
+  right: 300px;
   font-size: 1.5rem;
   font-family: "Roboto", sans-serif;
-  font-weight: 400;
 }
 
 .trashCan {
   position: absolute;
-  right: 500px;
+  right: 200px;
+  transition: all 0.3s linear;
+  color: #e11d41;
+  width: 0.8vw;
+}
+
+.trashCan:hover {
+  transform: scale(1.5);
+  color: #e11d74;
 }
 
 .newsTexts {

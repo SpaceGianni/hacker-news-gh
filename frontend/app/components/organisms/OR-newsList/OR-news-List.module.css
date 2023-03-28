@@ -6,6 +6,5 @@
   padding-right: 10px;
   display: grid;
   grid-auto-rows: auto;
-  position: relative;
-  height: 500px;
+  height: 55vh;
 }

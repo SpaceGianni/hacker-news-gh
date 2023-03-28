@@ -13,6 +13,15 @@
   font-family: "Italiana";
 }
 
+.heart {
+  font-size: 42px;
+  transition: all 0.3s linear;
+  margin-left: 20px;
+}
+.heart:hover {
+  transform: scale(1.5);
+}
+
 .container {
   display: flex;
 }

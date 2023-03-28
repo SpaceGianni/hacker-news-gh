@@ -1,7 +1,9 @@
 import styles from "./ML-newsText.module.css";
 import { TrashFill } from "react-bootstrap-icons";
+import { newConvertDate } from "../../../utils/daysJsFormat";
+import { NewsInterface } from "../../../news.interface";
 
-export default function News({ name, author, date, link }) {
+export default function News({ name, author, date, link, removeNews, key }) {
   return (
     <>
       <div className={styles.newsTexts}>
@@ -12,10 +14,10 @@ export default function News({ name, author, date, link }) {
         </h2>
         <p className={styles.newsAuthor}>- {author} -</p>
         <div className={styles.date}>
-          <p>{date}</p>
+          <p>{newConvertDate(date)}</p>
         </div>
-        <div className={styles.trashCan}>
-          <TrashFill color="RGB(229 21 74)" size={"2rem"} />
+        <div className={styles.trashCan} onClick={() => removeNews(key)}>
+          <TrashFill size={"2rem"} />
         </div>
       </div>
     </>

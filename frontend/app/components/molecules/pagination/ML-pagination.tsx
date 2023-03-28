@@ -1,7 +1,13 @@
 import styles from "./ML-pagination.module.css";
 import React from "react";
 
-export default function Pagination({ array_of_pages }) {
+export default function Pagination({
+  array_of_pages,
+  offset,
+  setOffSet,
+  limit,
+  setLimit,
+}) {
   return (
     <>
       <div className={styles.navigation}>

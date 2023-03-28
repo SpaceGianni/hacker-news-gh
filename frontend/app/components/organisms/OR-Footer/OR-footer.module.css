@@ -2,9 +2,7 @@
   background-color: rgb(26, 126, 93);
   width: 100%;
   color: white;
-  height: 85px;
+  height: 15vh;
   display: flex;
   justify-content: center;
-  position: relative;
-  bottom: 0px;
 }

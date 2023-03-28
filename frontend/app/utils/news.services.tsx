@@ -8,9 +8,12 @@ export const getNews = async (
   limit: number
 ): Promise<NewsInterface[]> => {
   const url = process.env.NEXT_PUBLIC_SERVER_URL_BACKEND;
+  console.log("URL", url);
   const response = await axios.get(
     `${url}news/updated?offset=${offset}&limit=${limit}`
   );
+  console.log("RESPONSE", response);
+
   const info = await response.data;
   return info;
 };
