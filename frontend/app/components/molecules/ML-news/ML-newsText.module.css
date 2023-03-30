@@ -5,32 +5,35 @@
 }
 
 .newsTitle {
-  size: 7rem;
   color: #0b0a0a;
   text-decoration: none;
   font-family: "Roboto", sans-serif;
 }
 
 .newsAuthor {
-  color: #c2baba;
-  margin-left: 70px;
-  font-size: 1.5rem;
+  color: #938c8c;
+  font-size: 18px;
   font-family: "Roboto", sans-serif;
+  position: absolute;
+  right: 600px;
 }
 
 .date {
   position: absolute;
-  right: 300px;
-  font-size: 1.5rem;
+  right: 200px;
   font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  display: inline-block;
+  color: #938c8c;
 }
 
 .trashCan {
   position: absolute;
-  right: 200px;
+  right: 100px;
   transition: all 0.3s linear;
   color: #e11d41;
   width: 0.8vw;
+  padding-top: 10px;
 }
 
 .trashCan:hover {
@@ -41,14 +44,18 @@
 .newsTexts {
   margin-left: 28px;
   display: flex;
-  align-items: center;
   border-bottom: 1px solid lightgrey;
-  height: 3.5em;
+  height: 4em;
   padding-left: 5px;
+  align-items: flex-start;
 }
 
 .newsTexts:hover {
   background-color: #d5d3d3;
   cursor: pointer;
   border-radius: 5px;
+}
+
+.url {
+  text-decoration: none;
 }

@@ -10,12 +10,16 @@ export default function Home() {
   const [subtitleSite_part1, setSubtitleSite_part1] = useState("We");
   const [subtitleSite_part2, setSubtitleSite_part2] = useState("hacker news!");
   const [heart, setHeart] = useState("❤️");
-  const [limit, setLimit] = useState(16);
+  const [limit, setLimit] = useState(15);
   const [offset, setOffSet] = useState(0);
   const [news, setNews] = useState([]);
+  const [array_of_pages, setArray_of_pages] = useState([1, 2, 3]);
+  const [actualPagination, setActualPagination] = useState({
+    offset: offset,
+    limit: limit,
+  });
 
   useEffect(() => {
-    console.log("news in UseEffct", news)
     getNews(offset, limit).then((news) => setNews(news));
   }, []);
 
@@ -28,49 +32,109 @@ export default function Home() {
     getNews(offset, limit).then((news) => setNews(news));
   };
 
+  const pages = Math.ceil(news.length / limit);
 
-  const news_per_page = 8;
-  const newsPerPage = Math.ceil(news.length / news_per_page);
-  const limit2 = newsPerPage;
-  const [array_of_pages, setArray_of_pages] = useState([]);
-
-  let element = 0;
-  const createPages = () => {
-    for (let i = 1; i <= limit2; i++) {
-      element = element + 1;
-      array_of_pages.push(element);
+  async function bringFirstPage() {
+    try {
+      setOffSet(0);
+      setLimit(15);
+      setActualPagination({
+        offset: 0,
+        limit: 16,
+      });
+      await getNews(offset, limit);
+    } catch (error) {
+      console.log(error);
+      console.log("Function bringFirstPage is not implemented.");
     }
-    return array_of_pages;
-  };
+  }
 
-  let actual_page = 1;
-  let array_positions = [];
-  let elem = 0;
-  const findNewsPositionPerPage = () => {
-    for (let i = 0; i < 5; i++) {
-      elem = (actual_page - 1) * news_per_page + i;
-      array_positions.push(elem);
+  async function bringSecondPage() {
+    try {
+      setOffSet(limit);
+      setLimit(15);
+      setActualPagination({
+        offset: limit,
+        limit: 15,
+      });
+      await getNews(offset, limit);
+    } catch (error) {
+      console.log(error);
+      throw new Error("Function bringSecondPage is not implemented.");
     }
-    return array_positions;
-  };
+  }
 
-  createPages();
-  findNewsPositionPerPage();
+  async function bringThirdPage() {
+    try {
+      setOffSet(limit * 2);
+      setLimit(15);
+      setActualPagination({
+        offset: limit * 2,
+        limit: 15,
+      });
+      await getNews(offset, limit);
+    } catch (error) {
+      console.log(error);
+      throw new Error("Function bringThirdPage is not implemented.");
+    }
+  }
 
+  async function bringNextPage() {
+    try {
+      if (offset > 64) {
+        setOffSet(0);
+        setLimit(15);
+        setActualPagination({
+          offset: 0,
+          limit: 15,
+        });
+        alert("No more news available");
+      } else {
+        setOffSet(actualPagination.offset + 15);
+        setLimit(actualPagination.limit);
+        setActualPagination({
+          offset: actualPagination.offset + 15,
+          limit: actualPagination.limit,
+        });
 
+      }
+      await getNews(offset, limit);
+    } catch (error) {
+      console.log(error);
+      throw new Error("Function bringNextPage is not implemented.");
+    }
+  }
 
-  let initialPosition = array_positions[0];
-  let finalPosition = array_positions[array_positions.length - 1] + 1;
-
-  const [finalArraywithNews, setFinalArraywithNews] = useState(
-    news.slice(initialPosition, finalPosition)
-  );
+  async function bringPreviousPage() {
+    try {
+      if (actualPagination.offset < 15) {
+        setOffSet(0);
+        setLimit(15);
+        setActualPagination({
+          offset: 0,
+          limit: 15,
+        });
+        alert("No more news available");
+      } else {
+        setOffSet(actualPagination.offset - 15);
+        setLimit(actualPagination.limit);
+        setActualPagination({
+          offset: actualPagination.offset - 15,
+          limit: actualPagination.limit,
+        });
+      }
+      await getNews(offset, limit);
+    } catch (error) {
+      console.log(error);
+      throw new Error("Function bringPreviousPage is not implemented.");
+    }
+  }
 
   return (
     <>
       <Header siteTitle={siteTitle} subtitleSite_part1={subtitleSite_part1} subtitleSite_part2={subtitleSite_part2} heart={heart} removeNews={removeNews}></Header>
-      <NewsList news={news} setNews={setNews} limit={limit} offset={offset}></NewsList>
-      <Footer array_of_pages={array_of_pages} limit={limit} setLimit={setLimit} offset={offset} setOffSet={setOffSet}></Footer>
+      <NewsList news={news} setNews={setNews} limit={limit} offset={offset} removeNews={removeNews}></NewsList>
+      <Footer array_of_pages={array_of_pages} limit={limit} setLimit={setLimit} offset={offset} setOffSet={setOffSet} bringFirstPage={bringFirstPage} setActualPagination={setActualPagination} bringSecondPage={bringSecondPage} bringThirdPage={bringThirdPage} bringNextPage={bringNextPage} bringPreviousPage={bringPreviousPage}></Footer>
     </>
   );
 }
